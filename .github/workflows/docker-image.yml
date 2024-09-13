@@ -20,8 +20,14 @@ jobs:
       uses: aquasecurity/trivy-action@0.20.0
       with:
         image-ref: web:${{ github.sha }}
-        format: 'table'
-        exit-code: '0'
+        format: 'json'
+        output: 'trivy-report.json'
+        exit-code: '1'
         ignore-unfixed: true
         vuln-type: 'os,library'
         severity: 'CRITICAL,HIGH'
+    - name: upload triviy scan repot
+      uses: actions/upload-artifact@v3
+      with:
+        name: trivy-scan-report
+        path: trivy-report.json
