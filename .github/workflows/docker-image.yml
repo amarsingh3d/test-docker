@@ -17,14 +17,11 @@ jobs:
     - name: Build the Docker image
       run: docker build . --file Dockerfile --tag web:${{ github.sha }}
     - name: Trivy scan of Docker iamge
-      uses: aquasec/trivy-action@v0.0.14
+      uses: aquasecurity/trivy-action@0.20.0
       with:
         image-ref: web:${{ github.sha }}
-        format: 'json'
+        format: 'table'
+        exit-code: '1'
+        ignore-unfixed: true
+        vuln-type: 'os,library'
         severity: 'CRITICAL,HIGH'
-        output: 'trivy-report.json'
-    - name: upload scan report
-      uses: actions/upload-artifact@v3
-      with:
-        name: trivy-report
-        path: trivy-report.json
