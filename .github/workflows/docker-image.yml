@@ -27,7 +27,7 @@ jobs:
         severity: 'CRITICAL,HIGH'
   
   Deploy-Docker-Image:
-    runs-on: ubuntu:latest
+    runs-on: ubuntu-latest
     needs: build-Docker-Image
     steps:
       - name: Push to Docker hub
