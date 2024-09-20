@@ -25,4 +25,13 @@ jobs:
         ignore-unfixed: true
         vuln-type: 'os,library'
         severity: 'CRITICAL,HIGH'
+  
+  Deploy-Docker-Image:
+    runs-on: ubuntu:latest
+    needs: build-Docker-Image
+    steps:
+      - name: Push to Docker hub
+        run: echo "Pushing image to DockerHUB"
+
+    
 
