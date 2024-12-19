@@ -1,21 +1,18 @@
-name: Docker Image CI
+name: Build and Tag Docker Image
 
 on:
   push:
-    branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
-
+    branches:
+      - main
+      
 jobs:
-
-  build-Docker-Image:
-
+  build-and-tag:
     runs-on: ubuntu-latest
-
     steps:
-    - uses: actions/checkout@v4
-    
-    - name: Setup JFrog CLI
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup JFrog CLI
         uses: jfrog/setup-jfrog-cli@v4
         env:
           JF_URL: ${{ vars.JF_URL }}
